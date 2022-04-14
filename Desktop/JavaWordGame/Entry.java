@@ -9,7 +9,12 @@ public class Entry
         {
             System.out.print("\033[H\033[2J");  
             System.out.println("Tip: guesses are case insensitive");
-            var player = new Player(new Table());
+            System.out.println("Letter colors:\n" 
+                + "\t" + Player.ANSI_RED + "Red: " + Player.ANSI_RESET + "wrong letter, wrong position\n"
+                + "\t" + Player.ANSI_YELLOW + "Yellow: " + Player.ANSI_RESET + "right letter, wrong position\n"
+                + "\t" + Player.ANSI_GREEN + "Green: " + Player.ANSI_RESET + "right letter, right position"
+                );
+            Player player = new Player(new Table());
             while(!player.makeMove())
             {
                 player.printGuesses();
@@ -20,12 +25,12 @@ public class Entry
     private static Boolean playAgain()
     {
         System.out.println("You want to play again? {y|n}");
-        var decision = _scanner.nextLine();
+        String decision = _scanner.nextLine();
         if(decision.toLowerCase().contains("n")) return false;
         else if(decision.toLowerCase().contains("y")) return true;
         return false;
     }
-    // yes, I copy-pasted this what will you do about it?
+    /// copy-pasted
     ///<summary>
     /// gets a random string from textfile, each string has to start with a new line (except )
     ///<summary>
@@ -53,7 +58,7 @@ public class Entry
         String wordCheck;
         FileReader originalDictionary = new FileReader(dictionaryPath);
         BufferedReader bufferedReader = new BufferedReader(originalDictionary);
-        FileWriter gameDictionary = new FileWriter("/Users/arturagalarian/Desktop/JavaWordGame/WordBank.txt");
+        FileWriter gameDictionary = new FileWriter("WordBank.txt");
         
         int i = 0;
         // checks each word in the file

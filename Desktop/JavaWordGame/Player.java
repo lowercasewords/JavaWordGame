@@ -25,12 +25,6 @@ public class Player
     // returns true if the move caused victory
     public boolean makeMove() throws Exception
     {
-        // // check if you won before the move
-        // if(_answerBuilder.toString().equals(_playerTable.getGuessWord()))
-        // {
-        //     return true;
-        // }
-        // declaring player's guess of 5 letters
         System.out.println("Your move: ");
         String yourGuess;
         do
@@ -41,7 +35,7 @@ public class Player
         } while(yourGuess.length() != 5);
 
         // getting the answer key
-        var answerWord = _playerTable.getGuessWord();
+        String answerWord = _playerTable.getGuessWord().toLowerCase();
         
         // checking each character
         for(int i = 0; i < yourGuess.length(); i++)
@@ -57,13 +51,12 @@ public class Player
         // each attempt represents your guess
         for(String attempt : _attempts)
         {
-            // skip an attempt if it's null
+            // skip a null attempt 
             if(attempt == null) 
             {
                 System.out.println("?????"); 
                 continue;
             }
-
             // iterating through each char in the attempt
             for(int i = 0; i < attempt.length(); i++)
             {

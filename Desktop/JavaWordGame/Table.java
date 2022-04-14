@@ -24,12 +24,12 @@ public class Table
     // uses default word bank text file, NOTE: all changes should go to another constructor
     public Table() throws IOException
     {
-        this("/Users/arturagalarian/Desktop/JavaWordGame/WordBank.txt");
+        this("WordBank.txt");
     }
 
     public void restartGuessWord() throws FileNotFoundException
     {
-        _guessWord = choose();
+        _guessWord = choose().toLowerCase();
     }
     // yes, I copy-pasted this what will you do about it?
     public String choose() throws FileNotFoundException
