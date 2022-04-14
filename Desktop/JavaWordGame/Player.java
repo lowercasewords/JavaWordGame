@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.Arrays;
 import javax.lang.model.util.ElementScanner14;
 
 public class Player
@@ -8,8 +8,7 @@ public class Player
     private Table _playerTable;
     private int _guessCounter = 0;
     private StringBuilder _answerBuilder = new StringBuilder("-----");
-    // private String _missPlaced = "";
-    private String[] attepmts = new String[5];
+    private String[] _attempts = new String[5];
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -27,11 +26,11 @@ public class Player
     // returns true if the move caused victory
     public boolean makeMove() throws Exception
     {
-        // check if you won before the move
-        if(_answerBuilder.toString().equals(_playerTable.getGuessWord()))
-        {
-            return true;
-        }
+        // // check if you won before the move
+        // if(_answerBuilder.toString().equals(_playerTable.getGuessWord()))
+        // {
+        //     return true;
+        // }
         // declaring player's guess of 5 letters
         System.out.println("Your move: ");
         String yourGuess;
@@ -51,32 +50,19 @@ public class Player
             //answer and guess chars are at the same index
             if(answerWord.charAt(i) == yourGuess.charAt(i))
             {
-                System.out.println("DEBUG: Char is at the same pos");
-                System.out.println("DEBUG: Repeated at index " + i);
-                _answerBuilder.replace(i, i+1, Character.toString(yourGuess.charAt(i)));
-                System.out.println("DEBUG: String builder: " + _answerBuilder);
-            }
-            //if the character exists in the answer
-            else if(answerWord.indexOf(yourGuess.charAt(i)) != -1)
-            {
-                System.out.println("DEBUG: Character '" + yourGuess.charAt(i) + "' exists in the answer");
-                // // if miss placed string didn't have the character
-                // if(_missPlaced.indexOf(yourGuess.charAt(i)) == -1)
-                // {
-                //     _missPlaced += yourGuess.charAt(i);
-                // }
+                _answerBuilder.replace(i, i+1, Character.toString(yourGuess.charAt(i)));   
             }
         }
         // your guess if being recorded 
-        attepmts[_guessCounter++] = yourGuess;
+        _attempts[_guessCounter++] = yourGuess;
         // each attempt represents your guess
-        for(String attempt : attepmts)
+        for(String attempt : _attempts)
         {
             // skip an attempt if it's null
             if(attempt == null) 
             {
                 System.out.println("?????"); 
-                break;
+                continue;
             }
 
             // iterating through each char in the attempt
@@ -107,6 +93,11 @@ public class Player
         // player wins if the player's guess equals to answer word
         if(_answerBuilder.toString().equals(_playerTable.getGuessWord()))
         {
+            System.out.println("You have won!, the word was: " + answerWord);
+            return true;
+        } else if(!Arrays.asList(_attempts).subList(0, 5).contains(null))
+        {
+            System.out.println("You've lost!, the word was: " + answerWord);
             return true;
         }
         // loses otherwise
