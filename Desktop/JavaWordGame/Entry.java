@@ -10,7 +10,7 @@ public class Entry
             System.out.print("\033[H\033[2J");  
             System.out.println("Tip: guesses are case insensitive");
             var player = new Player(new Table());
-            System.out.println(String.format("DEBUG Answer: %s", player.getTable().getGuessWord()));
+            System.out.println(player.getTable().getGuessWord());
             while(!player.makeMove())
             {
                 player.printGuesses();
@@ -20,7 +20,7 @@ public class Entry
 
     private static Boolean playAgain()
     {
-        System.out.println("You have won!, want to player again? {y|n}");
+        System.out.println("You want to play again? {y|n}");
         var decision = _scanner.nextLine();
         if(decision.toLowerCase().contains("n")) return false;
         else if(decision.toLowerCase().contains("y")) return true;
