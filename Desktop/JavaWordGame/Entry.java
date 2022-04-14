@@ -10,7 +10,6 @@ public class Entry
             System.out.print("\033[H\033[2J");  
             System.out.println("Tip: guesses are case insensitive");
             var player = new Player(new Table());
-            System.out.println(player.getTable().getGuessWord());
             while(!player.makeMove())
             {
                 player.printGuesses();
