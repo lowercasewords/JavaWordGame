@@ -42,9 +42,10 @@ public class Entry
         for(Scanner sc = new Scanner(f); sc.hasNext(); )
         {
             ++n;
-            String line = sc.nextLine();
+            String line = sc.nextLine().split("")[9];
             if(rand.nextInt(n) == 0)
-            result = line;         
+            result = line; 
+            break;        
         }
         return result;      
     }
